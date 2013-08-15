@@ -12,7 +12,10 @@ post '/users' do
 end
 
 get '/users/:user_id' do
-
+  @user = User.find_by_id(params[:user_id])
+  @posts = Post.where(user_id: @user.id)
+  @comments = Comment.where(user_id: @user.id)
+  erb :user_posts
 end
 
 

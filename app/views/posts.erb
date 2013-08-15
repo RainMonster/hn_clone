@@ -1,7 +1,7 @@
 <h1>All posts</h1>
 <% @posts.each do |p|%>
   <a href='/posts/<%= p.id %>'><h3><%= p.title %></h3></a>
-  <p>by <%= p.user.username %>
+  <p>by <a href='/users/<%= p.user.id %>'><%= p.user.username %></a>
   <hr>
 <% end %>
 
@@ -17,6 +17,8 @@
     <br>
     <input type="submit" value='new post'>
   </form>
-
+  <br>
+  <a href='/users/<%= current_user.id %>'> Your user page </a>
+  <br>
   <hr>
 <% end %>

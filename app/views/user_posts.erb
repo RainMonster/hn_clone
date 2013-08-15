@@ -1,0 +1,29 @@
+
+<h3>All posts by <%= @user.username %></h3>
+<br> 
+<% if @posts == [] %>
+  <p> This user has no posts </p>
+<% else %>
+  <% @posts.each do |post| %>
+    <a href='/posts/<%= post.id %>'> <%= post.title %> </a>
+    <br>
+  <% end %>
+<% end %>
+<hr>
+
+<h3>All comments by <%= @user.username %></h3>
+<br>
+<% if @comments == [] %>
+  <p> This user has no comments </p>
+<% else %>
+  <% @comments.each do |comment| %>
+    Comment: <%= comment.content %>
+    <br>
+    <%= post = Post.find_by_id(comment.post_id) %>
+    At: <a href='/posts/<%= comment.post_id %>'> <%= post.title %> </a>
+    <hr>
+  <% end %>
+<% end %>
+
+<a href='/posts'>Return to main page</a>
+<br>
