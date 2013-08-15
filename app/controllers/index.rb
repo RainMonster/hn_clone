@@ -15,7 +15,8 @@ post '/posts' do
 end
 
 get '/posts/:post_id' do
-
+  @post = Post.find_by_id(params[:post_id])
+  erb :post_show
 end
 
 delete '/posts/:post_id' do

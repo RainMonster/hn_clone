@@ -1,9 +1,10 @@
+<h1>All posts</h1>
 <% @posts.each do |p|%>
-  <h3><%= p.title %></h3>
+  <a href='/posts/<%= p.id %>'><h3><%= p.title %></h3></a>
 <% end %>
 
 <form action="/posts" method="post">
-  Create a new post:
+  <h2>Create a new post:</h2>
   <br>
   <input type="text" name="post[title]" placeholder='title'>
   <br>
