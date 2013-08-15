@@ -1,3 +1,4 @@
+
 get '/' do
   redirect '/posts'
 end
@@ -7,8 +8,12 @@ get '/posts' do
   erb :posts
 end
 
+# protected
 post '/posts' do
-  Post.create(params[:post])
+  redirect_if_logged_out!
+  post = Post.create(params[:post])
+  post.user = current_user
+  post.save
   redirect '/posts'
 end
 
@@ -17,14 +22,24 @@ get '/posts/:post_id' do
   erb :post_show
 end
 
+# protected
 delete '/posts/:post_id' do
-  Post.find_by_id(params[:post_id]).destroy
+  redirect_if_logged_out!
+
+  post = Post.find_by_id(params[:post_id])
+  if post.user == current_user
+    post.destroy
+  end
   redirect to '/posts'
 end
 
+# protected
 post '/posts/:post_id/comments' do
+  redirect_if_logged_out!
   post = Post.find_by_id(params[:post_id])
   comment = Comment.create(params[:comment])
+  comment.user = current_user
+  comment.save
   post.comments << comment
   redirect to "/posts/#{post.id}"
 end

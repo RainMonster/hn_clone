@@ -3,25 +3,31 @@
   <input type="hidden" name='_method' value='delete'>
   <input type='submit' value='Delete post'>
 </form>
-
+<p>by <%= @post.user.username %>
 <h5><a href='<%= @post.url %>'><%= @post.url %></a></h5>
 
+<a href='/posts'><<< Back to all posts</a>
 <hr>
 
 <% @post.comments.each do |comment| %>
   <div class='comment'>
     <%= comment.content %>
+    <p>by <%= comment.user.username %>
+    <hr>
   </div>
   </br>
 <% end %>
 
-<form action="/posts/<%= @post.id %>/comments" method="post">
-  <h2>Add a new comment:</h2>
-  <textarea name="comment[content]" placeholder='comment'>
-  </textarea>
-  <br>
-  <input type="submit" value='new post'>
-</form>
+<% if logged_in? %>
+  <form action="/posts/<%= @post.id %>/comments" method="post">
+    <h2>Add a new comment:</h2>
+    <textarea name="comment[content]" placeholder='comment'>
+    </textarea>
+    <br>
+    <input type="submit" value='new post'>
+  </form>
+<% end %>
 
 <br>
-<a href='/posts'><<< Back to all posts</a>
+<br>
+<hr>

@@ -16,4 +16,7 @@ helpers do
     current_user ? true : false
   end
 
+  def redirect_if_logged_out!
+    redirect to '/' unless logged_in?
+  end
 end

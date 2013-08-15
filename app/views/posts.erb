@@ -1,25 +1,22 @@
 <h1>All posts</h1>
 <% @posts.each do |p|%>
   <a href='/posts/<%= p.id %>'><h3><%= p.title %></h3></a>
+  <p>by <%= p.user.username %>
+  <hr>
 <% end %>
 
 <hr>
 
-<form action="/posts" method="post">
-  <h2>Create a new post:</h2>
-  <br>
-  <input type="text" name="post[title]" placeholder='title'>
-  <br>
-  <input type="text" name="post[url]" placeholder='url'>
-  <br>
-  <input type="submit" value='new post'>
-</form>
-
-<hr>
-
 <% if logged_in? %>
-  <a href='/logout'>Log Out</a>
-<% else %>
-  <a href='/users/new'>Sign Up</a>
-  <a href='/login'>Log In</a>
+  <form action="/posts" method="post">
+    <h2>Create a new post:</h2>
+    <br>
+    <input type="text" name="post[title]" placeholder='title'>
+    <br>
+    <input type="text" name="post[url]" placeholder='url'>
+    <br>
+    <input type="submit" value='new post'>
+  </form>
+
+  <hr>
 <% end %>
