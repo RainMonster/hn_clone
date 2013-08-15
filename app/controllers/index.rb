@@ -20,7 +20,8 @@ get '/posts/:post_id' do
 end
 
 delete '/posts/:post_id' do
-
+  Post.find_by_id(params[:post_id]).destroy
+  redirect to '/posts'
 end
 
 post '/posts/:post_id/comments' do
