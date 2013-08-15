@@ -1,6 +1,7 @@
 get '/' do
   # Look in app/views/index.erb
-  erb :index
+  # erb :index
+  redirect '/posts'
 end
 
 get '/posts' do
@@ -9,7 +10,8 @@ get '/posts' do
 end
 
 post '/posts' do
-  erb :posts
+  Post.create(params[:post])
+  redirect '/posts'
 end
 
 get '/posts/:post_id' do
