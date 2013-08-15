@@ -3,6 +3,8 @@
   <a href='/posts/<%= p.id %>'><h3><%= p.title %></h3></a>
 <% end %>
 
+<hr>
+
 <form action="/posts" method="post">
   <h2>Create a new post:</h2>
   <br>
@@ -12,3 +14,12 @@
   <br>
   <input type="submit" value='new post'>
 </form>
+
+<hr>
+
+<% if logged_in? %>
+  <a href='/logout'>Log Out</a>
+<% else %>
+  <a href='/users/new'>Sign Up</a>
+  <a href='/login'>Log In</a>
+<% end %>
