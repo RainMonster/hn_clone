@@ -22,3 +22,10 @@ end
 delete '/posts/:post_id' do
 
 end
+
+post '/posts/:post_id/comments' do
+  post = Post.find_by_id(params[:post_id])
+  comment = Comment.create(params[:comment])
+  post.comments << comment
+  redirect to "/posts/#{post.id}"
+end
